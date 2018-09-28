@@ -1,5 +1,6 @@
 import configparser
 import mysql.connector
+from utils import display_table
 
 credential = configparser.ConfigParser()
 credential.read('credential.conf')
@@ -11,13 +12,13 @@ db = mysql.connector.connect(host=hostname, user=username, passwd=password, data
 cursor = db.cursor()
 
 
-def display_table(table_name):
+def get_table(table_name):
     cursor.execute('SELECT * FROM ' + table_name)
+    header_row = cursor.description
     result = cursor.fetchall()
 
     if result:
-        for row in result:
-            print(row)
+        display_table(header_row, result)
     else:
         print('Table ' + table_name + ' is empty.')
 
