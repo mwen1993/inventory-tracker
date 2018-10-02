@@ -15,7 +15,7 @@ def display_table(cursor):
 def print_options():
     table = PrettyTable(['Key', 'Options'])
     table.align = 'l'
-    #table.border = False
+    table.border = False
 
     table.add_row(['1', 'Show available tables in database'])
     table.add_row(['2', 'Display a specific table'])
