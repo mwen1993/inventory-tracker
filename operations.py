@@ -11,6 +11,14 @@ database = credential.get('Credential', 'database')
 db = mysql.connector.connect(host=hostname, user=username, passwd=password, database=database)
 cursor = db.cursor()
 
+def list_tables():
+    """
+    Output a list of all available tables in the database
+    :return:
+    """
+    cursor.execute('SHOW tables')
+    display_table(cursor)
+
 
 def get_table(table_name):
     """
@@ -20,13 +28,7 @@ def get_table(table_name):
     :return: None
     """
     cursor.execute('SELECT * FROM ' + table_name)
-    header_row = cursor.description
-    result = cursor.fetchall()
-
-    if result:
-        display_table(header_row, result)
-    else:
-        print('Table ' + table_name + ' is empty.')
+    display_table(cursor)
 
 
 def add_item(shoe, table_name):
