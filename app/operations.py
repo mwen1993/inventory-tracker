@@ -1,6 +1,6 @@
 import configparser
 import mysql.connector
-from utils import display_table
+from app.utils import display_table
 
 credential = configparser.ConfigParser()
 credential.read('credential.conf')
@@ -10,6 +10,7 @@ password = credential.get('Credential', 'password')
 database = credential.get('Credential', 'database')
 db = mysql.connector.connect(host=hostname, user=username, passwd=password, database=database)
 cursor = db.cursor()
+
 
 def list_tables():
     """
@@ -28,7 +29,8 @@ def get_table(table_name):
     :return: None
     """
     cursor.execute('SELECT * FROM ' + table_name)
-    display_table(cursor)
+
+    return cursor
 
 
 def add_item(shoe, table_name):
