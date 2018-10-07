@@ -1,4 +1,4 @@
 # inventory-tracker
-Python application that uses MySQL to keep track of item inventory
-Currently implementing functionalities to add, remove, update, and delete.
-Plan to create user interface after.
+Python application to interact with mysql database, using flask to serve content through browsers, user can interact with mysql database through a simple web GUI. 
+
+Need to implement updating an entry in a table with flask, then implement front end for easy to use GUI. 
