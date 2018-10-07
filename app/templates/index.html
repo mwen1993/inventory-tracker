@@ -5,6 +5,39 @@
     <title>Inventory</title>
 </head>
 <body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <script>let msg = "";</script>
+            {% for message in messages %}
+                <script>msg += "{{message}}";</script>
+            {% endfor%}
+            <script>alert(msg)</script>
+        {% endif %}
+    {% endwith %}
+    <form action="/add" method="post" novalidate>
+        {{ add_form.hidden_tag() }}
+        <p>
+            {{ add_form.name.label }}
+            {{ add_form.name(size=24) }}
+            {{ add_form.color.label }}
+            {{ add_form.color(size=24) }}
+            {{ add_form.size.label }}
+            {{ add_form.size(size=24) }}
+            {{ add_form.purchased.label }}
+            {{ add_form.purchased(size=24) }}
+            {{ add_form.sold.label }}
+            {{ add_form.sold(size=24) }}
+            {{ add_form.submit() }}
+        </p>
+    </form>
+    <form  action="/delete" method="post" novalidate>
+        {{ delete_form.hidden_tag() }}
+        <p>
+            {{ delete_form.item_id.label }}
+            {{ delete_form.item_id(size=24) }}
+            {{ delete_form.submit() }}
+        </p>
+    </form>
     <table>
         <tr>
             {% for data in header %}

@@ -1,9 +1,7 @@
-import configparser
+from app import credential
 import mysql.connector
-from app.utils import display_table
+#from utils import display_table
 
-credential = configparser.ConfigParser()
-credential.read('credential.conf')
 hostname = credential.get('Credential', 'hostname')
 username = credential.get('Credential', 'username')
 password = credential.get('Credential', 'password')
@@ -18,7 +16,7 @@ def list_tables():
     :return:
     """
     cursor.execute('SHOW tables')
-    display_table(cursor)
+    #display_table(cursor)
 
 
 def get_table(table_name):
@@ -46,9 +44,12 @@ def add_item(shoe, table_name):
                     'VALUES (%s, %s, %s, %s, %s)'
     values = (shoe.name, shoe.color, shoe.size, shoe.purchased_price, shoe.sold_price)
 
-    cursor.execute(sql_statement, values)
-    db.commit()
-    print(cursor.rowcount, 'record inserted')
+    try:
+        cursor.execute(sql_statement, values)
+        db.commit()
+        return 'New entry has been added!'
+    except Exception as e:
+        return str(e)
 
 
 def delete_item(item_id, table_name):
@@ -62,9 +63,13 @@ def delete_item(item_id, table_name):
     """
     sql_statement = 'DELETE FROM ' + table_name + ' WHERE Id = ' + str(item_id)
 
-    cursor.execute(sql_statement)
-    db.commit()
-    print(cursor.rowcount, 'record(s) deleted')
+    try:
+        cursor.execute(sql_statement)
+        db.commit()
+        return 'Item ID: ' + item_id + ' has been deleted.'
+    except Exception as e:
+        print('inside exception for delete')
+        return str(e)
 
 
 def update_item(item_id, updates, table_name):
@@ -73,7 +78,7 @@ def update_item(item_id, updates, table_name):
     :param item_id: int
         the unique Id in the database corresponding to the item
     :param updates: dictionary
-        contains key, value pairs of columns, values to be updated, each key is a column name and values is update val
+        contains key, value pairs,(column name:values) to be updated, each key is a column name and values is update val
     :param table_name: string
         name of the table
     :return: None
@@ -93,6 +98,3 @@ def update_item(item_id, updates, table_name):
     cursor.execute(sql_statement)
     db.commit()
     print(cursor.rowcount, 'record(s) updated')
-
-
-def get_table_with_filter(): pass
