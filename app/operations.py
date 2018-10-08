@@ -68,7 +68,6 @@ def delete_item(item_id, table_name):
         db.commit()
         return 'Item ID: ' + item_id + ' has been deleted.'
     except Exception as e:
-        print('inside exception for delete')
         return str(e)
 
 
@@ -94,7 +93,9 @@ def update_item(item_id, updates, table_name):
 
     sql_statement = sql_statement.rstrip(', ')
     sql_statement += ' WHERE Id = ' + str(item_id)
-
-    cursor.execute(sql_statement)
-    db.commit()
-    print(cursor.rowcount, 'record(s) updated')
+    try:
+        cursor.execute(sql_statement)
+        db.commit()
+        return 'Item ID: ' + item_id + ' has been updated!'
+    except Exception as e:
+        return str(e)

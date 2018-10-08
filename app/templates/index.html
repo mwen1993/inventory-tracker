@@ -18,15 +18,15 @@
         {{ add_form.hidden_tag() }}
         <p>
             {{ add_form.name.label }}
-            {{ add_form.name(size=24) }}
+            {{ add_form.name(size=24, autocomplete="off") }}
             {{ add_form.color.label }}
-            {{ add_form.color(size=24) }}
+            {{ add_form.color(size=24, autocomplete="off") }}
             {{ add_form.size.label }}
-            {{ add_form.size(size=24) }}
+            {{ add_form.size(size=24, autocomplete="off") }}
             {{ add_form.purchased.label }}
-            {{ add_form.purchased(size=24) }}
+            {{ add_form.purchased(size=24, autocomplete="off") }}
             {{ add_form.sold.label }}
-            {{ add_form.sold(size=24) }}
+            {{ add_form.sold(size=24, autocomplete="off") }}
             {{ add_form.submit() }}
         </p>
     </form>
@@ -34,8 +34,26 @@
         {{ delete_form.hidden_tag() }}
         <p>
             {{ delete_form.item_id.label }}
-            {{ delete_form.item_id(size=24) }}
+            {{ delete_form.item_id(size=24, autocomplete="off") }}
             {{ delete_form.submit() }}
+        </p>
+    </form>
+    <form action="/update", method="post" novalidate>
+        {{ add_form.hidden_tag() }}
+        <p>
+            {{ update_form.Id.label }}
+            {{ update_form.Id(size=24, autocomplete="off") }}
+            {{ update_form.Name.label }}
+            {{ update_form.Name(size=24, autocomplete="off") }}
+            {{ update_form.Color.label }}
+            {{ update_form.Color(size=24, autocomplete="off") }}
+            {{ update_form.Size.label }}
+            {{ update_form.Size(size=24, autocomplete="off") }}
+            {{ update_form.Purchased_Price.label }}
+            {{ update_form.Purchased_Price(size=24, autocomplete="off") }}
+            {{ update_form.Sold_Price.label }}
+            {{ update_form.Sold_Price(size=24, autocomplete="off") }}
+            {{ update_form.submit() }}
         </p>
     </form>
     <table>
