@@ -1,0 +1,28 @@
+.layout {
+	max-width: 60em;
+	margin: auto;
+}
+
+.container {
+	max-height: 100 px;
+	overflow-y: scroll;
+	outline: 1px solid dimgrey;
+	outline-offset: -1px;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+th, td {
+  font-family: sans-serif;
+	background-color: gainsboro;
+	padding: 1em;
+	border: 1px solid white;
+}
+
+th {
+	text-align: left;
+	color: white;
+	background-color: dimgrey;
+}
