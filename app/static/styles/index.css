@@ -1,17 +1,30 @@
+/* PAGE LAYOUT */
 .layout {
 	max-width: 60em;
 	margin: auto;
 }
 
 .container {
-	max-height: 100 px;
+	max-height: 20em;
 	overflow-y: scroll;
 	outline: 1px solid dimgrey;
 	outline-offset: -1px;
 }
 
+h1 {
+	color: dimgrey;
+  font-family: sans-serif;
+	font-weight: normal;
+	white-space: nowrap;
+	padding: 0.5em 1rem;
+	border-bottom: 1px solid gainsboro;
+}
+/* PAGE LAYOUT END */
+
+/* DEFAULT TABLE */
 table {
 	border-collapse: collapse;
+	width: 100%;
 }
 
 th, td {
@@ -26,3 +39,36 @@ th {
 	color: white;
 	background-color: dimgrey;
 }
+/* DEFAULT TABLE END */
+
+/* CUSTOM TABLE */
+#table {
+	position: relative;
+	overflow: hidden;
+}
+
+#table th {
+	white-space: nowrap;
+}
+
+#table th:first-child div {
+	border-left: none;
+}
+
+#table th div {
+	position: absolute;
+	z-index: 2;
+	font-weight: bold;
+	width: 100%;
+	color: white;
+	background-color: dimgrey;
+	padding: 1rem;
+	border-left: 1px solid white;
+	margin-left: calc(-1rem - 1px);
+}
+
+#table thead div {
+	top: 0;
+	opacity: .5;
+}
+/* CUSTOM TABLE END */

@@ -6,6 +6,7 @@
     <title>Inventory</title>
 </head>
 <body>
+    <!--
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <script>let msg = "";</script>
@@ -57,16 +58,20 @@
             {{ update_form.submit() }}
         </p>
     </form>
-    <div class="layout">
+    -->
+    <div id="table" class="layout">
         <div class="container">
             <table>
+            <div class="thead-container">
                 <thead>
                     <tr>
                     {% for data in header %}
-                        <th>{{ data }}</th>
+                        <th><div>{{ data }}</div></th>
                     {% endfor %}
                     </tr>
                 </thead>
+            </div>
+
                 <tbody>
                 {% for row in content %}
                 <tr>
