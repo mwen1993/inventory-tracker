@@ -11,9 +11,8 @@ def index():
     add_form = AddForm()
     delete_form = DeleteForm()
     update_form = UpdateForm()
-    cursor = get_table('shoes')
-    header = [x[0] for x in cursor.description]
-    content = cursor.fetchall()
+    header_row, content = get_table('shoes')
+    header = [x[0] for x in header_row]
     return render_template('index.html', header=header, content=content,
                            add_form=add_form, delete_form=delete_form, update_form=update_form
                            )

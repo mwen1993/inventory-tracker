@@ -1,74 +1,26 @@
-/* PAGE LAYOUT */
-.layout {
-	max-width: 60em;
-	margin: auto;
+table{
+    text-align: left;
+    word-break: break-all;
 }
 
-.container {
-	max-height: 20em;
-	overflow-y: scroll;
-	outline: 1px solid dimgrey;
-	outline-offset: -1px;
-}
-
-h1 {
-	color: dimgrey;
-  font-family: sans-serif;
-	font-weight: normal;
-	white-space: nowrap;
-	padding: 0.5em 1rem;
-	border-bottom: 1px solid gainsboro;
-}
-/* PAGE LAYOUT END */
-
-/* DEFAULT TABLE */
-table {
-	border-collapse: collapse;
-	width: 100%;
+tbody {
+    background-color: #ddd;
+    height: 100px;
+    overflow: scroll;
+    display: block;
 }
 
 th, td {
-  font-family: sans-serif;
-	background-color: gainsboro;
-	padding: 1em;
-	border: 1px solid white;
+    padding: 3px 10px;
 }
 
-th {
-	text-align: left;
-	color: white;
-	background-color: dimgrey;
-}
-/* DEFAULT TABLE END */
 
-/* CUSTOM TABLE */
-#table {
-	position: relative;
-	overflow: hidden;
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout: fixed;
 }
 
-#table th {
-	white-space: nowrap;
+thead, tbody{
+    width: 75%;
 }
-
-#table th:first-child div {
-	border-left: none;
-}
-
-#table th div {
-	position: absolute;
-	z-index: 2;
-	font-weight: bold;
-	width: 100%;
-	color: white;
-	background-color: dimgrey;
-	padding: 1rem;
-	border-left: 1px solid white;
-	margin-left: calc(-1rem - 1px);
-}
-
-#table thead div {
-	top: 0;
-	opacity: .5;
-}
-/* CUSTOM TABLE END */

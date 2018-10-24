@@ -59,31 +59,25 @@
         </p>
     </form>
     -->
-    <div id="table" class="layout">
-        <div class="container">
-            <table>
-            <div class="thead-container">
-                <thead>
-                    <tr>
-                    {% for data in header %}
-                        <th><div>{{ data }}</div></th>
-                    {% endfor %}
-                    </tr>
-                </thead>
-            </div>
 
-                <tbody>
-                {% for row in content %}
-                <tr>
-                    {% for data in row %}
-                    <td>{{ data }}</td>
-                    {% endfor %}
-                </tr>
-                {% endfor %}
-                </tbody>
+    <table>
+        <thead>
+            <tr>
+            {% for data in header %}
+                <th>{{ data }}</th>
+            {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in content %}
+        <tr>
+            {% for data in row %}
+            <td>{{ data }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-            </table>
-        </div>
-    </div>
 </body>
 </html>

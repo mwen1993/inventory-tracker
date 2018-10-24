@@ -6,10 +6,9 @@ hostname = credential.get('Credential', 'hostname')
 username = credential.get('Credential', 'username')
 password = credential.get('Credential', 'password')
 database = credential.get('Credential', 'database')
-db = mysql.connector.connect(host=hostname, user=username, passwd=password, database=database)
-cursor = db.cursor()
 
 
+'''
 def list_tables():
     """
     Output a list of all available tables in the database
@@ -17,6 +16,7 @@ def list_tables():
     """
     cursor.execute('SHOW tables')
     #display_table(cursor)
+'''
 
 
 def get_table(table_name):
@@ -26,9 +26,18 @@ def get_table(table_name):
         the name of the table to display
     :return: None
     """
-    cursor.execute('SELECT * FROM ' + table_name)
+    try:
+        db = mysql.connector.connect(host=hostname, user=username, passwd=password, database=database)
+        cursor = db.cursor()
+        cursor.execute('SELECT * FROM ' + table_name)
+        header_row = cursor.description
+        content = cursor.fetchall()
+    except Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
 
-    return cursor
+    return header_row, content
 
 
 def add_item(shoe, table_name):
@@ -45,11 +54,16 @@ def add_item(shoe, table_name):
     values = (shoe.name, shoe.color, shoe.size, shoe.purchased_price, shoe.sold_price)
 
     try:
+        db = mysql.connector.connect(host=hostname, user=username, passwd=password, database=database)
+        cursor = db.cursor()
         cursor.execute(sql_statement, values)
         db.commit()
-        return 'New entry has been added!'
     except Exception as e:
         return str(e)
+    finally:
+        cursor.close()
+
+    return 'New entry has been added!'
 
 
 def delete_item(item_id, table_name):
@@ -64,11 +78,16 @@ def delete_item(item_id, table_name):
     sql_statement = 'DELETE FROM ' + table_name + ' WHERE Id = ' + str(item_id)
 
     try:
+        db = mysql.connector.connect(host=hostname, user=username, passwd=password, database=database)
+        cursor = db.cursor()
         cursor.execute(sql_statement)
         db.commit()
-        return 'Item ID: ' + item_id + ' has been deleted.'
     except Exception as e:
         return str(e)
+    finally:
+        cursor.close()
+
+    return 'Item ID: ' + item_id + ' has been deleted.'
 
 
 def update_item(item_id, updates, table_name):
@@ -93,9 +112,15 @@ def update_item(item_id, updates, table_name):
 
     sql_statement = sql_statement.rstrip(', ')
     sql_statement += ' WHERE Id = ' + str(item_id)
+
     try:
+        db = mysql.connector.connect(host=hostname, user=username, passwd=password, database=database)
+        cursor = db.cursor()
         cursor.execute(sql_statement)
         db.commit()
-        return 'Item ID: ' + item_id + ' has been updated!'
     except Exception as e:
         return str(e)
+    finally:
+        cursor.close()
+
+    return 'Item ID: ' + item_id + ' has been updated!'
