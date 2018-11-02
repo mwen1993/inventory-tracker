@@ -35,7 +35,7 @@ def add():
 def delete():
     form = DeleteForm()
     if form.validate_on_submit():
-        message = delete_item(str(form.item_id.data), 'shoes')
+        message = delete_item(str(form.id.data), 'shoes')
         flash(message)
         return redirect(url_for('index'))
     else:

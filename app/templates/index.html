@@ -6,7 +6,6 @@
     <title>Inventory</title>
 </head>
 <body>
-    <!--
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <script>let msg = "";</script>
@@ -16,68 +15,65 @@
             <script>alert(msg)</script>
         {% endif %}
     {% endwith %}
-    <form action="/add" method="post" novalidate>
+    <form id="add-form" action="/add" method="post" novalidate>
         {{ add_form.hidden_tag() }}
-        <p>
-            {{ add_form.name.label }}
-            {{ add_form.name(size=24, autocomplete="off") }}
-            {{ add_form.color.label }}
-            {{ add_form.color(size=24, autocomplete="off") }}
-            {{ add_form.size.label }}
-            {{ add_form.size(size=24, autocomplete="off") }}
-            {{ add_form.purchased.label }}
-            {{ add_form.purchased(size=24, autocomplete="off") }}
-            {{ add_form.sold.label }}
-            {{ add_form.sold(size=24, autocomplete="off") }}
-            {{ add_form.submit() }}
-        </p>
+        {{ add_form.name(type="hidden") }}
+        {{ add_form.color(type="hidden") }}
+        {{ add_form.size(type="hidden") }}
+        {{ add_form.purchased(type="hidden") }}
+        {{ add_form.sold(type="hidden") }}
     </form>
-    <form  action="/delete" method="post" novalidate>
+    <form id="delete-form" action="/delete" method="post" novalidate>
         {{ delete_form.hidden_tag() }}
-        <p>
-            {{ delete_form.item_id.label }}
-            {{ delete_form.item_id(size=24, autocomplete="off") }}
-            {{ delete_form.submit() }}
-        </p>
+        {{ delete_form.id(type="hidden") }}
     </form>
-    <form action="/update", method="post" novalidate>
-        {{ add_form.hidden_tag() }}
-        <p>
-            {{ update_form.Id.label }}
-            {{ update_form.Id(size=24, autocomplete="off") }}
-            {{ update_form.Name.label }}
-            {{ update_form.Name(size=24, autocomplete="off") }}
-            {{ update_form.Color.label }}
-            {{ update_form.Color(size=24, autocomplete="off") }}
-            {{ update_form.Size.label }}
-            {{ update_form.Size(size=24, autocomplete="off") }}
-            {{ update_form.Purchased_Price.label }}
-            {{ update_form.Purchased_Price(size=24, autocomplete="off") }}
-            {{ update_form.Sold_Price.label }}
-            {{ update_form.Sold_Price(size=24, autocomplete="off") }}
-            {{ update_form.submit() }}
-        </p>
+    <form id="update-form" action="/update", method="post" novalidate>
+        {{ update_form.hidden_tag() }}
+        {{ update_form.id(type="hidden") }}
+        {{ update_form.name(type="hidden") }}
+        {{ update_form.color(type="hidden") }}
+        {{ update_form.size(type="hidden") }}
+        {{ update_form.purchased_price(type="hidden") }}
+        {{ update_form.sold_price(type="hidden") }}
     </form>
-    -->
 
-    <table>
-        <thead>
+    <div class="table-container">
+        <h1>Inventory</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th width="10px">&#10006</th>
+                {% for data in header %}
+                    <th>{{ data }}</th>
+                {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in content %}
             <tr>
-            {% for data in header %}
-                <th>{{ data }}</th>
-            {% endfor %}
+                <td width="10px"><button class="remove-button" onclick="deleteRow(this)">&#10006</button></td>
+                {% for data in row %}
+                <td>{{ data }}</td>
+                {% endfor %}
             </tr>
-        </thead>
-        <tbody>
-        {% for row in content %}
-        <tr>
-            {% for data in row %}
-            <td>{{ data }}</td>
             {% endfor %}
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+    <div class="calculator-container">
+         <h1>Ebay Fees Calculator</h1>
+        <p>Under Construction</p>
+    </div>
 
+    <script>
+        function deleteRow(element) {
+            let row = element.parentNode.parentNode;
+            let id = Number(row.children[1].innerHTML);
+            let deleteForm = document.getElementById("delete-form");
+            let idField = deleteForm.children[1];
+            idField.value = id;
+            deleteForm.submit();
+        }
+    </script>
 </body>
 </html>
